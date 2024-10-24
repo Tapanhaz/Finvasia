@@ -19,10 +19,11 @@ def prepare_data(dataframe: pl.DataFrame(),
             "intoi" : "OI"
             }
         ).with_columns(
-          pl.from_epoch(
-              "Timestamp", time_unit="s").dt.replace_time_zone(
-                  time_zone="UTC").dt.convert_time_zone(
-                    time_zone="Asia/Kolkata")
+          #pl.from_epoch(
+          #    "Timestamp", time_unit="s").dt.replace_time_zone(
+          #        time_zone="UTC").dt.convert_time_zone(
+          #          time_zone="Asia/Kolkata")
+          pl.col("Timestamp").mul(1000).cast(pl.Datetime(time_unit="ms", time_zone= "Asia/Kolkata")
                 )
     
     if filtered:
